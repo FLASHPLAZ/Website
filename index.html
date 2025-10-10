@@ -1,193 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ronith | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  <style>
-    *{margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif;}
-    body{background:linear-gradient(120deg,#1e1e2f,#232341);color:#fff;overflow-x:hidden;transition:background 0.3s,color 0.3s;}
-    html{scroll-behavior:smooth;}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ronith | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<style>
+* {margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif;}
+body {overflow-x:hidden; transition: background 0.3s, color 0.3s; background:#1e1e2f; color:#fff;}
+body.light {background:#f2f2f2; color:#111;}
+html {scroll-behavior:smooth;}
 
-    /* Dark / Light Mode */
-    body.light{background:#f2f2f2;color:#111;}
-    body.light header{background:rgba(255,255,255,0.9);}
-    body.light .service-card{background:#fff;color:#111;}
-    body.light .services{background:#f7f7f7;}
-    body.light footer{background:#ddd;}
+/* Header */
+header {position:fixed; top:0; left:0; width:100%; background:rgba(0,0,0,0.4); backdrop-filter:blur(10px); display:flex; justify-content:space-between; align-items:center; padding:15px 50px; z-index:1000;}
+header img.logo {height:45px;}
+header nav {display:flex; align-items:center;}
+header nav a {margin:0 15px; text-decoration:none; color:inherit; transition:.3s;}
+header nav a:hover {color:#f953c6;}
+.menu-toggle {display:none; cursor:pointer; font-size:1.5rem;}
+.theme-toggle {margin-left:15px; cursor:pointer; font-size:1.2rem;}
 
-    /* Header */
-    header{position:fixed;top:0;left:0;width:100%;
-      background:rgba(0,0,0,0.4);backdrop-filter:blur(10px);
-      display:flex;justify-content:space-between;align-items:center;
-      padding:15px 50px;z-index:1000;}
-    header img.logo{height:45px;}
-    header nav{display:flex;align-items:center;}
-    header nav a{margin:0 15px;text-decoration:none;color:inherit;transition:.3s;}
-    header nav a:hover{color:#f953c6;}
-    .menu-toggle{display:none;cursor:pointer;font-size:1.5rem;}
-    .theme-toggle{margin-left:15px;cursor:pointer;font-size:1.2rem;}
+/* Hero Section */
+.hero {height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; position:relative;}
+#particles-js {position:absolute; top:0; left:0; width:100%; height:100%; z-index:-1;}
+.hero h2 {font-size:3rem; margin-bottom:10px; animation:fadeDown 1s ease;}
+.hero p.typing {font-size:1.2rem; margin-bottom:25px; height:30px; overflow:hidden; white-space:nowrap; border-right:2px solid #f953c6; animation:blink 0.7s step-end infinite;}
+.btn {background:#f953c6; border:none; padding:12px 25px; border-radius:25px; color:#fff; cursor:pointer; font-weight:bold; transition:0.3s;}
+.btn:hover {transform:scale(1.05); box-shadow:0 0 15px #f953c6;}
+@keyframes fadeDown {from{opacity:0; transform:translateY(-30px);} to{opacity:1; transform:translateY(0);}}
+@keyframes blink {50%{border-color:transparent;}}
 
-    /* Hero */
-    .hero{
-      height:100vh;display:flex;flex-direction:column;
-      justify-content:center;align-items:center;text-align:center;
-      padding:20px;background:url('https://picsum.photos/1920/1080?blur=2') center/cover fixed;
-      position:relative;z-index:1;
-    }
-    .hero::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:-1;}
-    .hero h2{font-size:3rem;margin-bottom:10px;animation:fadeDown 1s ease;}
-    .hero p.typing{font-size:1.2rem;margin-bottom:25px;height:30px;overflow:hidden;white-space:nowrap;border-right:2px solid #f953c6;animation:blink 0.7s step-end infinite;}
-    @keyframes blink{50%{border-color:transparent;}}
-    .btn{background:#f953c6;border:none;padding:12px 25px;border-radius:25px;color:#fff;cursor:pointer;font-weight:bold;transition:0.3s;}
-    .btn:hover{transform:scale(1.05);box-shadow:0 0 15px #f953c6;}
-    @keyframes fadeDown{from{opacity:0;transform:translateY(-30px);}to{opacity:1;transform:translateY(0);}}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+/* Sections */
+section {padding:100px 50px; text-align:center;}
+.services, .projects, .skills, .pricing, .timeline, .testimonials {background:#2c2c54;}
+.services h2, .skills h2, .projects h2, .testimonials h2, .pricing h2, .timeline h2 {font-size:2.5rem; margin-bottom:50px;}
+.service-grid, .pricing-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px;}
+.service-card, .plan-card {background:#1e1e2f; padding:30px; border-radius:12px; opacity:0; transform:translateY(40px); transition:0.6s;}
+.service-card.show, .plan-card.show {opacity:1; transform:translateY(0);}
+.service-card h3, .plan-card h3 {color:#f953c6; margin-bottom:10px;}
+.bar {background:#444; border-radius:20px; overflow:hidden; margin-top:8px;}
+.bar div {height:15px; width:0; background:#f953c6; border-radius:20px;}
 
-    /* Services */
-    .services{padding:100px 50px;background:#2c2c54;text-align:center;}
-    .services h2{font-size:2.5rem;margin-bottom:50px;}
-    .service-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;}
-    .service-card{background:#1e1e2f;padding:30px;border-radius:12px;transition:.3s;opacity:0;transform:translateY(40px);}
-    .service-card.show{opacity:1;transform:translateY(0);transition:all 0.6s ease;}
-    .service-card h3{margin-bottom:15px;color:#f953c6;}
+/* Carousel */
+.carousel, .testimonial-slide {display:flex; overflow-x:auto; scroll-behavior:smooth; gap:20px; padding:10px;}
+.project-card, .testimonial-card {min-width:300px; background:#1e1e2f; padding:20px; border-radius:12px; flex-shrink:0; transition:.3s;}
+.project-card img {width:100%; border-radius:8px; margin-bottom:10px;}
+.project-card:hover, .testimonial-card:hover {transform:scale(1.05);}
+.testimonial-card p {margin-bottom:10px;}
 
-    /* Skills */
-    .skills{padding:100px 50px;text-align:center;}
-    .skills h2{font-size:2.5rem;margin-bottom:40px;}
-    .skill{margin:20px 0;text-align:left;max-width:600px;margin:auto;}
-    .skill span{font-weight:500;}
-    .bar{background:#444;border-radius:20px;overflow:hidden;margin-top:8px;}
-    .bar div{height:15px;width:0;background:#f953c6;border-radius:20px;}
+/* Timeline */
+.timeline-item {position:relative; margin:20px auto; max-width:600px; padding-left:40px;}
+.timeline-item::before {content:""; position:absolute; left:10px; top:0; height:100%; width:4px; background:#f953c6; border-radius:2px;}
+.timeline-item h3 {color:#f953c6; margin-bottom:5px;}
 
-    /* Projects Carousel */
-    .projects{padding:100px 50px;background:#2c2c54;text-align:center;}
-    .projects h2{font-size:2.5rem;margin-bottom:40px;}
-    .carousel{display:flex;overflow-x:auto;scroll-behavior:smooth;gap:20px;padding:10px;}
-    .project-card{min-width:300px;background:#1e1e2f;padding:20px;border-radius:12px;flex-shrink:0;transition:.3s;}
-    .project-card img{width:100%;border-radius:8px;margin-bottom:10px;}
-    .project-card:hover{transform:scale(1.05);}
+/* Contact */
+.contact a {display:inline-block; margin:10px; background:#f953c6; padding:12px 20px; border-radius:25px; color:#fff; text-decoration:none; transition:.3s;}
+.contact a:hover {transform:scale(1.05); box-shadow:0 0 10px #f953c6;}
 
-    /* Contact */
-    .contact{padding:100px 50px;text-align:center;}
-    .contact h2{font-size:2rem;margin-bottom:30px;}
-    .contact a{display:inline-block;margin:10px;background:#f953c6;padding:12px 20px;border-radius:25px;color:#fff;text-decoration:none;transition:.3s;}
-    .contact a:hover{transform:scale(1.05);box-shadow:0 0 10px #f953c6;}
+/* Footer */
+footer {padding:30px; text-align:center; background:#1a1a2e; font-size:.9rem; color:#fff;}
 
-    /* Footer */
-    footer{padding:30px;text-align:center;background:#1a1a2e;font-size:.9rem;}
-    footer a{color:#f953c6;text-decoration:none;}
+/* Floating Hire Me */
+#hire-me {position:fixed; bottom:20px; right:20px; background:#f953c6; color:#fff; padding:15px 20px; border-radius:50px; cursor:pointer; z-index:1000; transition:.3s;}
+#hire-me:hover {transform:scale(1.1); box-shadow:0 0 15px #f953c6;}
 
-    /* Mobile */
-    @media(max-width:768px){
-      header nav{position:absolute;top:65px;left:-100%;background:#1a1a2e;width:100%;flex-direction:column;transition:.3s;}
-      header nav.active{left:0;}
-      header nav a{margin:15px 0;}
-      .menu-toggle{display:block;color:#fff;}
-      .hero h2{font-size:2rem;}
-      .hero p{font-size:1rem;}
-    }
-  </style>
+/* Mobile */
+@media(max-width:768px){
+  header nav {position:absolute; top:65px; left:-100%; background:#1a1a2e; width:100%; flex-direction:column; transition:.3s;}
+  header nav.active {left:0;}
+  header nav a {margin:15px 0;}
+  .menu-toggle {display:block; color:#fff;}
+  .hero h2 {font-size:2rem;}
+  .hero p {font-size:1rem;}
+}
+</style>
 </head>
 <body>
 
-  <header>
-    <img src="your-logo.png" alt="Logo" class="logo">
-    <div class="menu-toggle">☰</div>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#services">Services</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-      <div class="theme-toggle">🌙</div>
-    </nav>
-  </header>
+<header>
+<img src="your-logo.png" alt="Logo" class="logo">
+<div class="menu-toggle">☰</div>
+<nav>
+<a href="#home">Home</a>
+<a href="#services">Services</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#testimonials">Testimonials</a>
+<a href="#pricing">Pricing</a>
+<a href="#timeline">Timeline</a>
+<a href="#contact">Contact</a>
+<div class="theme-toggle">🌙</div>
+</nav>
+</header>
 
-  <section class="hero" id="home">
-    <h2>Hello, I'm Ronith 👋</h2>
-    <p class="typing"></p>
-    <a href="#services"><button class="btn">Explore My Work</button></a>
-  </section>
+<section class="hero" id="home">
+<div id="particles-js"></div>
+<h2>Hello, I'm Ronith 👋</h2>
+<p class="typing"></p>
+<a href="#services" class="btn">Explore My Work</a>
+<a href="your-cv.pdf" class="btn" style="margin-top:15px;">Download CV</a>
+</section>
 
-  <section class="services" id="services">
-    <h2>🚀 My Services</h2>
-    <div class="service-grid">
-      <div class="service-card"><h3>🌐 Custom Websites</h3><p>Modern, responsive, SEO-friendly websites.</p></div>
-      <div class="service-card"><h3>🤖 Discord & Bot Tools</h3><p>Automation, moderation, and bot solutions.</p></div>
-      <div class="service-card"><h3>💻 Full-Stack Development</h3><p>From frontend UI to backend APIs.</p></div>
-      <div class="service-card"><h3>🎨 UI/UX Design</h3><p>Attractive, user-friendly, modern designs.</p></div>
-    </div>
-  </section>
+<section class="services" id="services">
+<h2>🚀 My Services</h2>
+<div class="service-grid">
+<div class="service-card"><h3>🌐 Custom Websites</h3><p>Modern, responsive, SEO-friendly websites.</p></div>
+<div class="service-card"><h3>🤖 Discord & Bot Tools</h3><p>Automation, moderation, and bot solutions.</p></div>
+<div class="service-card"><h3>💻 Full-Stack Development</h3><p>From frontend UI to backend APIs.</p></div>
+<div class="service-card"><h3>🎨 UI/UX Design</h3><p>Attractive, user-friendly, modern designs.</p></div>
+</div>
+</section>
 
-  <section class="skills" id="skills">
-    <h2>⚡ My Skills</h2>
-    <div class="skill"><span>HTML / CSS</span><div class="bar"><div data-skill="90"></div></div></div>
-    <div class="skill"><span>JavaScript</span><div class="bar"><div data-skill="85"></div></div></div>
-    <div class="skill"><span>Python</span><div class="bar"><div data-skill="80"></div></div></div>
-    <div class="skill"><span>React</span><div class="bar"><div data-skill="75"></div></div></div>
-  </section>
+<section class="skills" id="skills">
+<h2>⚡ My Skills</h2>
+<div class="skill"><span>HTML / CSS</span><div class="bar"><div data-skill="90"></div></div></div>
+<div class="skill"><span>JavaScript</span><div class="bar"><div data-skill="85"></div></div></div>
+<div class="skill"><span>Python</span><div class="bar"><div data-skill="80"></div></div></div>
+<div class="skill"><span>React</span><div class="bar"><div data-skill="75"></div></div></div>
+</section>
 
-  <section class="projects" id="projects">
-    <h2>📂 Featured Projects</h2>
-    <div class="carousel">
-      <div class="project-card"><img src="https://picsum.photos/400/200" alt="Project"><h3>Project 1</h3><p>Custom landing page design.</p></div>
-      <div class="project-card"><img src="https://picsum.photos/401/200" alt="Project"><h3>Project 2</h3><p>Discord bot automation system.</p></div>
-      <div class="project-card"><img src="https://picsum.photos/402/200" alt="Project"><h3>Project 3</h3><p>Full-stack dashboard app.</p></div>
-    </div>
-  </section>
+<section class="projects" id="projects">
+<h2>📂 Featured Projects</h2>
+<div class="carousel">
+<div class="project-card"><img src="https://picsum.photos/400/200" alt="Project"><h3>Project 1</h3><p>Landing page design.</p></div>
+<div class="project-card"><img src="https://picsum.photos/401/200" alt="Project"><h3>Project 2</h3><p>Discord bot automation.</p></div>
+<div class="project-card"><img src="https://picsum.photos/402/200" alt="Project"><h3>Project 3</h3><p>Full-stack dashboard.</p></div>
+</div>
+</section>
 
-  <section class="contact" id="contact">
-    <h2>📩 Contact Me</h2>
-    <a href="mailto:your@email.com">Email Me</a>
-    <a href="https://discord.gg/yourdiscord" target="_blank">Discord</a>
-    <a href="https://github.com/yourgithub" target="_blank">GitHub</a>
-  </section>
+<section class="testimonials" id="testimonials">
+<h2>💬 Testimonials</h2>
+<div class="testimonial-slide">
+<div class="testimonial-card"><p>"Ronith delivered an amazing website!"</p><h4>-
+Client 1</h4></div>
 
-  <footer>
-    <p>© 2025 Ronith | All Rights Reserved</p>
-  </footer>
-
-  <script>
-    // Typing effect
-    const text = ["Web Developer 🌐","Bot Developer 🤖","Full-Stack Engineer 💻","UI/UX Designer 🎨"];
-    let i=0,j=0;const typingElement=document.querySelector(".typing");
-    function type(){
-      if(j<text[i].length){typingElement.textContent += text[i][j];j++;setTimeout(type,100);}
-      else{setTimeout(erase,1500);}
-    }
-    function erase(){
-      if(j>0){typingElement.textContent = text[i].substring(0,j-1);j--;setTimeout(erase,50);}
-      else{i=(i+1)%text.length;setTimeout(type,200);}
-    }
-    type();
-
-    // Mobile menu
-    const menuToggle=document.querySelector(".menu-toggle");
-    const nav=document.querySelector("header nav");
-    menuToggle.addEventListener("click",()=>{nav.classList.toggle("active");});
-
-    // Theme toggle
-    const themeToggle=document.querySelector(".theme-toggle");
-    themeToggle.addEventListener("click",()=>{
-      document.body.classList.toggle("light");
-      themeToggle.textContent = document.body.classList.contains("light") ? "🌙" : "☀️";
-    });
-
-    // Skill bars animation
-    const skillBars=document.querySelectorAll(".bar div");
-    function showBars(){skillBars.forEach(bar=>{const value=bar.getAttribute("data-skill");bar.style.width=value+"%";});}
-    window.addEventListener("scroll",()=>{if(window.scrollY > document.getElementById("skills").offsetTop-400){showBars();}});
-
-    // Scroll animations for services
-    const serviceCards=document.querySelectorAll(".service-card");
-    window.addEventListener("scroll",()=>{
-      serviceCards.forEach(card=>{
-        const rect=card.getBoundingClientRect();
-        if(rect.top<window.innerHeight-100){card.classList.add("show");}
-      });
-    });
-  </script>
-</body>
-</html>
+<div class="testimonial-card"><p>"Highly recommend his bot tools."</p><h4>- Client 2</h4></div> <div class="testimonial-card"><p>"Excellent full-stack development skills."</p><h4>- Client 3</h4></div> </div> </section> <section class="pricing" id="pricing"> <h2>💰 Pricing Plans</h2> <div class="pricing-grid"> <div class="plan-card"><h3>Basic</h3><p>Simple website / bot</p><p>$100</p><a class="btn" href="#contact">Hire Now</a></div> <div class="plan-card"><h3>Standard</h3><p>Full website + bot</p><p>$250</p><a class="btn" href="#contact">Hire Now</a></div> <div class="plan-card"><h3>Premium</h3><p>Full-stack solution + design</p><p>$500</p><a class="btn" href="#contact">Hire Now</a></div> </div> </section> <section class="timeline" id="timeline"> <h2>📅 My Journey</h2> <div class="timeline-item"><h3>2023</h3><p>Started learning web development</p></div> <div class="timeline-item"><h3>2024</h3><p>Built first Discord bot tool</p></div> <div class="timeline-item"><h3>2025</h3><p>Full-stack projects & freelance work</p></div> </section> <section class="contact" id="contact"> <h2>📩 Contact Me</h2> <a href="mailto:your@email.com">Email Me</a> <a href="https://discord.gg/yourdiscord" target="_blank">Discord</a> <a href="https://github.com/yourgithub" target="_blank">GitHub</a> </section> <footer> <p>© 2025 Ronith | All Rights Reserved</p> </footer> <div id="hire-me" onclick="location.href='#contact'">Hire Me</div> <script> // Typing effect const text=["Web Developer 🌐","Bot Developer 🤖","Full-Stack Engineer 💻","UI/UX Designer 🎨"]; let i=0,j=0;const typingElement=document.querySelector(".typing"); function type(){if(j<text[i].length){typingElement.textContent+=text[i][j];j++;setTimeout(type,100);}else{setTimeout(erase,1500);}} function erase(){if(j>0){typingElement.textContent=text[i].substring(0,j-1);j--;setTimeout(erase,50);}else{i=(i+1)%text.length;setTimeout(type,200);}} type(); // Mobile menu const menuToggle=document.querySelector(".menu-toggle"); const nav=document.querySelector("header nav"); menuToggle.addEventListener("click",()=>{nav.classList.toggle("active");}); // Theme toggle const themeToggle=document.querySelector(".theme-toggle"); themeToggle.addEventListener("click",()=>{document.body.classList.toggle("light"); themeToggle.textContent=document.body.classList.contains("light")?"🌙":"☀️";}); // Skill bars animation const skillBars=document.querySelectorAll(".bar div"); function showBars(){skillBars.forEach(bar=>{const value=bar.getAttribute("data-skill");bar.style.width=value+"%";});} window.addEventListener("scroll",()=>{if(window.scrollY>document.getElementById("skills").offsetTop-400){showBars();}}); // Scroll animations for services & plans const serviceCards=document.querySelectorAll(".service-card, .plan-card"); window.addEventListener("scroll",()=>{serviceCards.forEach(card=>{const rect=card.getBoundingClientRect(); if(rect.top<window.innerHeight-100){card.classList.add("show");}});}); // Particles.js particlesJS("particles-js", { "particles": { "number": {"value":80}, "size": {"value":3}, "move":{"speed":2}, "line_linked":{"enable":true,"distance":150,"color":"#f953c6"} }}); </script> </body> </html>
