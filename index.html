@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Portfolio</title>
-
+  <title>My Portfolio — Pro Version</title>
   <style>
-    /* =============== ROOT THEME COLORS =============== */
+    /* --- Colors & Theme --- */
     :root {
-      --bg: #0b0b0b;
-      --text: #ffffff;
-      --accent: #ff1a1a;
-      --card: #141414;
+      --bg: #0c0c0c;
+      --text: #eeeeee;
+      --accent: #ff2b2b;
+      --card: #1a1a1a;
+      --muted: #aaaaaa;
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-      scroll-behavior: smooth;
+      font-family: "Poppins", sans-serif;
     }
 
     body {
@@ -32,51 +31,52 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      padding: 15px 50px;
+      right: 0;
+      background: rgba(0,0,0,0.85);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 16px 32px;
       z-index: 1000;
       border-bottom: 2px solid var(--accent);
     }
-
     header h1 {
       color: var(--accent);
-      letter-spacing: 1px;
+      font-size: 1.6rem;
     }
-
     nav a {
       color: var(--text);
-      margin-left: 20px;
+      margin-left: 24px;
       text-decoration: none;
-      transition: color 0.3s ease;
+      font-weight: 500;
+      transition: color 0.3s;
     }
     nav a:hover {
       color: var(--accent);
     }
 
-    section {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 100px 30px 60px;
-      transition: transform 0.8s ease, opacity 0.8s ease;
-      opacity: 0;
-      transform: translateX(100%);
+    main {
+      margin-top: 80px; /* space for header */
     }
 
+    section {
+      min-height: 100vh;
+      padding: 80px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: transform 0.8s ease, opacity 0.6s ease;
+    }
     section.active {
       opacity: 1;
       transform: translateX(0);
     }
-
     section.slide-left {
       transform: translateX(-100%);
+      opacity: 0;
     }
 
     h2 {
@@ -84,90 +84,97 @@
       margin-bottom: 20px;
       color: var(--accent);
     }
-
     p {
-      max-width: 700px;
       font-size: 1rem;
       line-height: 1.6;
+      color: var(--muted);
+      max-width: 650px;
     }
 
-    /* =============== PROJECTS =============== */
+    /* Projects grid */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
+      gap: 24px;
       width: 90%;
       max-width: 1000px;
-      margin-top: 30px;
+      margin-top: 32px;
     }
-
     .project-card {
       background: var(--card);
-      padding: 15px;
       border: 2px solid var(--accent);
       border-radius: 12px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
     .project-card img {
       width: 100%;
-      height: auto;
-      border-radius: 10px;
-      transition: all 0.4s ease;
+      display: block;
+      transition: transform 0.4s ease, filter 0.4s ease;
       cursor: pointer;
-      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
     }
-
     .project-card img:hover {
-      transform: scale(1.08);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      transform: scale(1.1);
       filter: brightness(1.1);
     }
-
-    .project-card img.clicked {
-      transform: scale(1.15);
-      transition: transform 0.2s ease;
+    .project-card .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
-
-    .project-card h3 {
-      margin-top: 10px;
+    .project-card:hover .overlay {
+      opacity: 1;
+    }
+    .project-card .proj-info {
+      padding: 16px;
+    }
+    .proj-info h3 {
       color: var(--accent);
+      margin-bottom: 8px;
     }
 
-    /* =============== CONTACT FORM =============== */
-    form {
+    /* Contact form */
+    .contact-form {
+      width: 90%;
+      max-width: 450px;
+      margin-top: 24px;
       display: flex;
       flex-direction: column;
-      width: 80%;
-      max-width: 400px;
-      gap: 15px;
-      margin-top: 20px;
+      gap: 16px;
     }
-
-    form input, form textarea {
-      padding: 10px 15px;
+    .contact-form input,
+    .contact-form textarea {
+      padding: 12px;
+      border-radius: 8px;
       border: 2px solid var(--accent);
-      border-radius: 6px;
-      background: transparent;
+      background: var(--card);
       color: var(--text);
-      resize: none;
+      font-size: 1rem;
+      resize: vertical;
     }
-
-    form button {
+    .contact-form button {
       background: var(--accent);
       color: var(--text);
+      padding: 12px;
       border: none;
-      padding: 10px;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    .contact-form button:hover {
+      background: #ff4a4a;
     }
 
-    form button:hover {
-      background: #ff4040;
-    }
-
-    /* =============== LOADING + POPUP =============== */
+    /* Spinner + popup */
     .spinner {
       border: 4px solid #333;
       border-top: 4px solid var(--accent);
@@ -177,62 +184,72 @@
       animation: spin 1s linear infinite;
       margin: 10px auto;
     }
-
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
-
     .popup {
       position: fixed;
       top: 20px;
       right: -400px;
       background: var(--card);
       color: var(--text);
-      padding: 15px 25px;
+      padding: 14px 24px;
       border-left: 4px solid var(--accent);
       border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
       opacity: 0;
       transition: right 0.5s ease, opacity 0.5s ease;
-      z-index: 100;
+      z-index: 999;
     }
-
     .popup.show {
       right: 20px;
       opacity: 1;
     }
-
     .popup.success { border-left-color: #25d366; }
     .popup.error { border-left-color: #ff3333; }
 
-    /* =============== WHATSAPP BUTTON =============== */
+    /* WhatsApp */
     .whatsapp-btn {
       position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background-color: #25d366;
-      color: white;
-      border-radius: 50%;
+      bottom: 24px;
+      right: 24px;
       width: 60px;
       height: 60px;
+      background: #25d366;
+      color: white;
+      border-radius: 50%;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       font-size: 30px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease;
-      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: transform 0.3s;
       z-index: 999;
     }
-
     .whatsapp-btn:hover {
       transform: scale(1.1);
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      header {
+        padding: 12px 20px;
+      }
+      section {
+        padding: 100px 16px 60px;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+    }
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.4rem; }
+      nav a { margin-left: 16px; font-size: 0.9rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <h1>My Portfolio</h1>
     <nav>
@@ -243,160 +260,152 @@
     </nav>
   </header>
 
-  <!-- HOME -->
-  <section id="home" class="active">
-    <h2>Welcome to My Portfolio</h2>
-    <p>I'm a Developer passionate about Web, App, and Bot Development.</p>
-  </section>
+  <main>
+    <!-- HOME -->
+    <section id="home" class="active">
+      <h2>Welcome to My World</h2>
+      <p>I build modern web apps, mobile apps & bots with flair, performance and beautiful design.</p>
+    </section>
 
-  <!-- PROJECTS -->
-  <section id="projects">
-    <h2>My Projects</h2>
-    <div class="projects-grid">
-      <div class="project-card">
-        <img src="https://via.placeholder.com/400x250" alt="Project 1" />
-        <h3>Portfolio Website</h3>
-        <p>Responsive personal website built using HTML, CSS & JS.</p>
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2>Projects & Works</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="overlay"></div>
+          <img src="https://via.placeholder.com/400x250" alt="Project 1" />
+          <div class="proj-info">
+            <h3>Portfolio Website</h3>
+            <p>Custom portfolio with animations & responsiveness.</p>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="overlay"></div>
+          <img src="https://via.placeholder.com/400x250" alt="Project 2" />
+          <div class="proj-info">
+            <h3>Discord Bot</h3>
+            <p>Bot for automation and server management.</p>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="overlay"></div>
+          <img src="https://via.placeholder.com/400x250" alt="Project 3" />
+          <div class="proj-info">
+            <h3>Mobile App</h3>
+            <p>Smooth mobile app built for performance.</p>
+          </div>
+        </div>
       </div>
-      <div class="project-card">
-        <img src="https://via.placeholder.com/400x250" alt="Project 2" />
-        <h3>Discord Bot</h3>
-        <p>Automation and utility bot built using Node.js.</p>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About Me</h2>
+      <p>I'm a developer passionate about crafting delightful digital experiences using clean code, animations & efficient systems.</p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <p>Got a project idea or just want to say hi? Fill out the form below.</p>
+
+      <form class="contact-form" id="contactForm">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message..." required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+
+      <div id="loadingSpinner" style="display:none;">
+        <div class="spinner"></div>
       </div>
-      <div class="project-card">
-        <img src="https://via.placeholder.com/400x250" alt="Project 3" />
-        <h3>App Tool</h3>
-        <p>Mobile app designed for efficiency and simplicity.</p>
-      </div>
-    </div>
-  </section>
+      <div id="popup" class="popup"></div>
+    </section>
+  </main>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      I'm a full-stack developer who loves building creative and efficient digital experiences. I specialize in
-      <b>Web Development, App Development, and Automation Tools</b>.
-    </p>
-  </section>
+  <a href="https://wa.me/1234567890" class="whatsapp-btn" target="_blank">💬</a>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <p>Send me a message below, and I’ll get back soon!</p>
-
-    <form id="contactForm">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" placeholder="Your Message..." required></textarea>
-      <button type="submit" id="submitBtn">Send Message</button>
-    </form>
-
-    <div id="loadingSpinner" style="display:none;">
-      <div class="spinner"></div>
-      <p>Sending your message...</p>
-    </div>
-
-    <div id="popup" class="popup"></div>
-  </section>
-
-  <!-- WHATSAPP FLOAT BUTTON -->
-  <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-btn">
-    💬
-  </a>
-
-  <!-- =============== JAVASCRIPT =============== -->
   <script>
-    // Home visibility fix
+    // Ensure first section visible
     window.addEventListener("load", () => {
-      const firstSection = document.querySelector("section");
-      if (firstSection) {
-        firstSection.classList.add("active");
-        firstSection.classList.remove("slide-left");
+      const first = document.querySelector("section");
+      if (first) {
+        first.classList.add("active");
+        first.classList.remove("slide-left");
       }
     });
 
-    // Slide Scroll Animation
+    // Slide page transition logic
     const sections = document.querySelectorAll("section");
     let lastScroll = window.scrollY;
-
-    const handleScroll = () => {
+    function handleScroll() {
       const scrollTop = window.scrollY;
-      const windowHeight = window.innerHeight;
       const direction = scrollTop > lastScroll ? "down" : "up";
       lastScroll = scrollTop;
 
-      sections.forEach(section => {
-        const top = section.getBoundingClientRect().top;
-        if (top < windowHeight * 0.7 && top > -windowHeight * 0.7) {
-          section.classList.add("active");
-          section.classList.remove("slide-left");
+      sections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        const top = rect.top;
+        const vh = window.innerHeight;
+        if (top < vh * 0.7 && top > -vh * 0.7) {
+          sec.classList.add("active");
+          sec.classList.remove("slide-left");
         } else {
-          if (direction === "down") section.classList.add("slide-left");
-          else section.classList.remove("slide-left");
-          section.classList.remove("active");
+          sec.classList.remove("active");
+          if (direction === "down") sec.classList.add("slide-left");
+          else sec.classList.remove("slide-left");
         }
       });
-    };
-
+    }
     window.addEventListener("scroll", handleScroll);
     handleScroll();
 
     // Project image click effect
-    document.querySelectorAll('.project-card img').forEach(img => {
-      img.addEventListener('click', () => {
-        img.classList.add('clicked');
-        setTimeout(() => img.classList.remove('clicked'), 400);
+    document.querySelectorAll(".project-card img").forEach(img => {
+      img.addEventListener("click", () => {
+        img.classList.add("clicked");
+        setTimeout(() => img.classList.remove("clicked"), 400);
       });
     });
 
-    // Contact Form Logic
+    // Contact form with Web3Forms API
     const form = document.getElementById("contactForm");
     const spinner = document.getElementById("loadingSpinner");
     const popup = document.getElementById("popup");
-    const submitBtn = document.getElementById("submitBtn");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      spinner.style.display = "block";
+
+      const formData = new FormData(form);
+      // Insert your Web3Forms access key
+      formData.append("access_key", "YOUR_WEB3FORMS_ACCESS_KEY");
+
+      try {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData
+        });
+        const data = await res.json();
+        spinner.style.display = "none";
+        if (data.success) {
+          showPopup("success", "Message sent! Thank you.");
+          form.reset();
+        } else {
+          showPopup("error", data.message || "Failed to send message.");
+        }
+      } catch (err) {
+        spinner.style.display = "none";
+        showPopup("error", "Network error. Try again later.");
+        console.error("Form error:", err);
+      }
+    });
 
     function showPopup(type, message) {
       popup.textContent = message;
       popup.className = `popup show ${type}`;
       setTimeout(() => popup.classList.remove("show"), 4000);
     }
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      spinner.style.display = "block";
-      submitBtn.disabled = true;
-
-      const data = {
-        name: form.name.value,
-        email: form.email.value,
-        message: form.message.value
-      };
-
-      try {
-        const res = await fetch("https://your-bothosting-name.bothosting.net/send", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        });
-
-        const result = await res.json();
-        spinner.style.display = "none";
-        submitBtn.disabled = false;
-
-        if (result.status === "success") {
-          showPopup("success", result.message);
-          form.reset();
-        } else {
-          showPopup("error", result.message);
-        }
-      } catch (err) {
-        spinner.style.display = "none";
-        submitBtn.disabled = false;
-        showPopup("error", "❌ Failed to send message. Try again later.");
-      }
-    });
   </script>
 </body>
 </html>
