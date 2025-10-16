@@ -3,101 +3,123 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Portfolio — Your Name</title>
-  <meta name="description" content="Web, App & Bots developer portfolio with animations." />
+  <title>Your Portfolio — Red & Black</title>
+  <meta name="description" content="Web, App & Bots Developer — Portfolio" />
+  <meta name="theme-color" content="#0b0b0b" />
 
-  <!-- Theme colors -->
   <style>
+    /* =========================
+       THEME VARIABLES
+       ========================= */
     :root{
       --bg:#0b0b0b;
       --panel:#0f0f10;
       --accent:#ff1f1f; /* bright red */
       --muted:#9b9b9b;
       --glass: rgba(255,255,255,0.03);
-      --max-width:1100px;
+      --card:#131313;
       --radius:12px;
-      --blur:10px;
-      --gap:24px;
+      --max-width:1200px;
     }
 
-    /* Reset */
+    /* =========================
+       BASE RESET
+       ========================= */
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      font-family:Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       background: linear-gradient(180deg,#070707 0%, #0e0e0e 100%);
       color:#eee;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-      padding:40px 20px;
+      line-height:1.5;
       display:flex;
       justify-content:center;
-      align-items:flex-start;
+      padding:20px;
     }
 
-    /* page wrapper with bright red border */
+    /* =========================
+       WRAPPER
+       ========================= */
     .wrap{
       width:100%;
       max-width:var(--max-width);
       border-radius:16px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
       border: 6px solid var(--accent);
       overflow:hidden;
     }
 
-    header{
-      position:sticky;
-      top:0;
-      z-index:30;
+    /* =========================
+       HEADER / NAV
+       ========================= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
       backdrop-filter: blur(6px);
-      background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.12));
+      background: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.12));
       border-bottom:1px solid rgba(255,255,255,0.03);
     }
-
-    /* nav */
     .navbar{
       display:flex;
-      gap:16px;
       align-items:center;
       justify-content:space-between;
+      gap:12px;
       padding:14px 22px;
     }
-
     .brand{
+      display:flex;align-items:center;gap:12px;color:var(--accent);font-weight:800
+    }
+    .logo{
+      width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#fff2f2,#ffbfbf);display:flex;align-items:center;justify-content:center;color:#121212;font-weight:900;
+      box-shadow: 0 8px 20px rgba(255,31,31,0.12);
+    }
+    nav ul{display:flex;gap:10px;list-style:none;padding:0;margin:0}
+    nav a{color:#ddd;text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:700;transition:all .22s}
+    nav a:hover{transform:translateY(-3px);color:var(--accent)}
+    nav a.active{color:var(--accent);text-shadow:0 2px 12px rgba(255,31,31,0.08)}
+
+    /* =========================
+       SECTIONS (full-screen style)
+       ========================= */
+    main{
+      overflow:visible;
+    }
+    section{
+      min-height:calc(100vh - 100px); /* header + padding */
       display:flex;
       align-items:center;
-      gap:12px;
-      color:var(--accent);
-      font-weight:700;
-      letter-spacing:0.6px;
+      padding:60px 28px;
+      gap:28px;
+      position:relative;
+      transition: transform 0.8s cubic-bezier(.2,.9,.2,1), opacity 0.6s ease;
+      opacity:0;
+      transform: translateX(100%);
+      will-change: transform, opacity;
     }
-    .brand .logo{
-      width:44px;height:44px;border-radius:10px;
-      background:linear-gradient(135deg,#fff2f2, #ffbfbf);
-      display:flex;align-items:center;justify-content:center;color:#121212;font-weight:800;
-      box-shadow: 0 6px 18px rgba(255,31,31,0.12), inset 0 -6px 18px rgba(0,0,0,0.15);
+    /* when visible */
+    section.active{
+      opacity:1;
+      transform: translateX(0);
     }
-
-    nav ul{display:flex;gap:14px;list-style:none;padding:0;margin:0}
-    nav a{
-      color:#ddd;text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:600;font-size:14px;
-      transition:all .25s ease;
-    }
-    nav a:hover{background:rgba(255,255,255,0.02);transform:translateY(-2px)}
-    nav a.active{color:var(--accent);text-shadow:0 2px 18px rgba(255,31,31,0.12)}
-
-    /* main grid */
-    main{
-      padding:28px;
-      display:grid;
-      gap:var(--gap);
+    /* when sliding out to left */
+    section.slide-left{
+      transform: translateX(-100%);
+      opacity:0;
     }
 
-    /* hero */
-    .hero{
+    .container {
+      width:100%;
+      max-width:1100px;
+      margin:0 auto;
+    }
+
+    /* HERO */
+    .hero-grid{
       display:grid;
       grid-template-columns: 1fr 420px;
       gap:24px;
@@ -105,59 +127,26 @@
     }
     .hero-card{
       background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
-      padding:28px;
-      border-radius:12px;
-      border: 1px solid rgba(255,255,255,0.03);
-      box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+      padding:28px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
     }
-    .hero h1{
-      font-size:36px;
-      margin:0 0 8px 0;
-      color:#fff;
-    }
-    .muted{
-      color:var(--muted);
-    }
+    .hero h1{font-size:36px;margin:0 0 8px 0;color:#fff}
+    .muted{color:var(--muted)}
     .hero p{margin:0 0 18px 0;font-size:15px;color:#e6e6e6}
 
-    .cta{
-      display:flex;gap:12px;align-items:center;
-    }
-    .btn{
-      background:var(--accent);
-      color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;
-      box-shadow: 0 8px 24px rgba(255,31,31,0.14);
-      cursor:pointer;
-    }
-    .btn.ghost{
-      background:transparent;border:1px solid rgba(255,255,255,0.06);color:#fff;font-weight:700;
-    }
+    .cta{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:800;cursor:pointer;box-shadow: 0 10px 30px rgba(255,31,31,0.12)}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:#fff}
 
-    /* hero image panel */
-    .hero-img{
-      border-radius:12px;
-      overflow:hidden;
-      border: 2px solid rgba(255,255,255,0.03);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-      display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,#111, #0b0b0b);
-    }
+    .hero-img{border-radius:12px;overflow:hidden;border: 2px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,#111,#0b0b0b)}
     .hero-img img{width:100%;height:100%;object-fit:cover;display:block}
 
-    /* sections */
-    section{
-      padding:18px;
-      border-radius:10px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.006), rgba(255,255,255,0.004));
-      border: 1px solid rgba(255,255,255,0.02);
-    }
+    /* GENERAL SECTION STYLES */
+    .section-title{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+    .section-title h2{margin:0;font-size:22px;color:#fff}
+    .line{flex:1;height:1px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.04));border-radius:2px}
 
-    .section-title{
-      display:flex;align-items:center;gap:12px;margin-bottom:12px;
-    }
-    .section-title h2{margin:0;font-size:20px;color:#fff}
-    .section-title .line{flex:1;height:1px;background:linear-gradient(90deg, transparent, rgba(255,255,255,0.04));border-radius:2px}
-
-    /* cards grid for projects */
+    /* GRID CARDS */
     .grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -168,374 +157,421 @@
       padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);
       display:flex;flex-direction:column;gap:12px;transition:transform .35s ease, box-shadow .35s ease;
     }
-    .card:hover{transform:translateY(-8px);box-shadow:0 18px 48px rgba(0,0,0,0.6)}
-    .card .thumb{height:160px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
-    .card .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .card:hover{transform:translateY(-10px);box-shadow:0 22px 60px rgba(0,0,0,0.6)}
+    .thumb{height:160px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
     .tags{display:flex;gap:8px;flex-wrap:wrap}
-    .tag{font-size:12px;background:rgba(255,31,31,0.12);color:var(--accent);padding:6px 8px;border-radius:8px;font-weight:700}
+    .tag{font-size:12px;background:rgba(255,31,31,0.12);color:var(--accent);padding:6px 8px;border-radius:8px;font-weight:800}
 
-    /* Services row */
+    /* SERVICES */
     .services{display:flex;gap:12px;flex-wrap:wrap}
-    .service{flex:1;min-width:200px;padding:16px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));border:1px solid rgba(255,255,255,0.02)}
+    .service{flex:1;min-width:220px;padding:16px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.006), rgba(255,255,255,0.003));border:1px solid rgba(255,255,255,0.02)}
 
-    /* About & contact layout */
+    /* ABOUT & CONTACT */
     .two-col{display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start}
-
-    /* contact form */
     .contact-form{display:flex;flex-direction:column;gap:10px}
-    .input, textarea{
-      background:var(--glass);border:1px solid rgba(255,255,255,0.03);padding:12px;border-radius:8px;color:#fff;
-      font-size:14px;outline:none;
-    }
+    .input, textarea{background:var(--glass);border:1px solid rgba(255,255,255,0.03);padding:12px;border-radius:8px;color:#fff;font-size:14px}
     textarea{min-height:120px;resize:vertical}
-    .socials{display:flex;gap:8px}
 
-    footer{
-      padding:18px;border-top:1px solid rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:space-between;
-      color:var(--muted);font-size:13px;
-    }
+    footer{padding:18px;border-top:1px solid rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:13px}
 
-    /* Reveal animations (text & images) */
-    .reveal {
-      opacity:0;
-      transform: translateY(20px);
-      transition:transform .7s cubic-bezier(.2,.9,.2,1), opacity .7s ease;
-      will-change:transform,opacity;
-    }
-    .reveal.in-view{
-      opacity:1;
-      transform: translateY(0);
-    }
+    /* =========================
+       REVEAL / SLIDE ANIMATIONS
+       ========================= */
+    .reveal{opacity:0;transform: translateY(20px);transition:transform .7s cubic-bezier(.2,.9,.2,1),opacity .7s ease}
+    .reveal.in-view{opacity:1;transform: translateY(0)}
+    .slide-left{opacity:0;transform:translateX(-40px) scale(.99);transition:transform .8s .05s cubic-bezier(.2,.9,.2,1),opacity .8s ease}
+    .slide-right{opacity:0;transform:translateX(40px) scale(.99);transition:transform .8s .05s cubic-bezier(.2,.9,.2,1),opacity .8s ease}
+    .slide-left.in-view,.slide-right.in-view{opacity:1;transform:translateX(0) scale(1)}
 
-    /* image slide left/right */
-    .slide-left{opacity:0; transform: translateX(-40px) scale(.99); transition: transform .8s cubic-bezier(.2,.9,.2,1), opacity .8s ease;}
-    .slide-right{opacity:0; transform: translateX(40px) scale(.99); transition: transform .8s cubic-bezier(.2,.9,.2,1), opacity .8s ease;}
-    .slide-left.in-view, .slide-right.in-view{opacity:1; transform: translateX(0) scale(1);}
+    /* Popup + spinner */
+    .spinner{border:4px solid #222;border-top:4px solid var(--accent);border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite;margin:0 auto}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .popup{position:fixed;top:20px;right:-420px;background:var(--card);color:var(--text);padding:14px 18px;border-left:4px solid var(--accent);border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,0.4);opacity:0;transition:right .45s ease,opacity .45s ease;z-index:999}
+    .popup.show{right:20px;opacity:1}
+    .popup.success{border-left-color:#25d366}
+    .popup.error{border-left-color:#ff3333}
 
-    /* small screens */
+    /* WhatsApp button */
+    .whatsapp-btn{position:fixed;bottom:20px;right:20px;background:#25d366;color:#fff;width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 8px 24px rgba(0,0,0,0.3);z-index:999;cursor:pointer;text-decoration:none}
+    .whatsapp-btn:hover{transform:scale(1.06);transition:transform .18s}
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
     @media (max-width:1000px){
-      .hero{grid-template-columns:1fr; padding-bottom:6px}
-      .two-col{grid-template-columns:1fr;}
+      .hero-grid{grid-template-columns:1fr}
+      .two-col{grid-template-columns:1fr}
       .grid{grid-template-columns:repeat(2,1fr)}
+      section{padding:40px 18px}
       .hero-img{height:320px}
     }
-
     @media (max-width:640px){
-      body{padding:18px}
       .grid{grid-template-columns:1fr}
       nav ul{display:none}
       .navbar{padding:12px}
+      .logo{width:40px;height:40px}
     }
-
-    /* tiny decorative animated accent */
-    .accent-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 6px 20px rgba(255,31,31,0.18), 0 0 22px rgba(255,31,31,0.06)}
   </style>
 </head>
 <body>
   <div class="wrap" id="top">
     <header>
-      <div class="navbar">
+      <div class="navbar container" style="padding:12px 20px">
         <div class="brand">
           <div class="logo">YN</div>
-          <div>
-            <div style="font-size:14px">Your Name</div>
-            <div style="font-size:11px;color:var(--muted)">Web · App · Bots & Tools</div>
+          <div style="line-height:1;">
+            <div style="font-weight:800">Your Name</div>
+            <div style="font-size:12px;color:var(--muted)">Web · App · Bots & Tools</div>
           </div>
         </div>
-        <nav aria-label="Primary">
+
+        <nav aria-label="Primary navigation">
           <ul>
-            <li><a href="#home" class="nav-link active">Home</a></li>
-            <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#projects" class="nav-link">Projects</a></li>
-            <li><a href="#services" class="nav-link">Services</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
+            <li><a class="nav-link active" href="#home">Home</a></li>
+            <li><a class="nav-link" href="#projects">Projects</a></li>
+            <li><a class="nav-link" href="#services">Services</a></li>
+            <li><a class="nav-link" href="#about">About</a></li>
+            <li><a class="nav-link" href="#contact">Contact</a></li>
           </ul>
         </nav>
       </div>
     </header>
 
     <main>
-      <!-- HERO -->
-      <section id="home" class="hero">
-        <div class="hero-card">
-          <div class="reveal reveal-text">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-              <div class="accent-dot"></div>
-              <div style="color:var(--muted);font-weight:700;font-size:13px">Hi — I'm a Full-Stack Maker</div>
+      <!-- HOME / HERO -->
+      <section id="home" class="active">
+        <div class="container hero-grid">
+          <div class="hero-card">
+            <div class="reveal" style="margin-bottom:8px">
+              <small style="color:var(--muted);font-weight:700">Hi — I'm a Full-Stack Maker</small>
             </div>
+            <h1 class="reveal">I build Web, Mobile Apps & Intelligent Bots</h1>
+            <p class="reveal muted">I design and develop smooth, fast, and delightful apps — from product idea to production. Focus: Web Development, Mobile / Cross-platform Apps, Bots & Automations, and Tools that scale.</p>
 
-            <h1 class="reveal-text">I build Web, Mobile Apps & Intelligent Bots</h1>
-            <p class="reveal-text muted">I design and develop smooth, fast, and delightful apps — from product idea to production. Focus: Web Development, Mobile / Cross-platform Apps, Bots & Automations, and Tools that scale.</p>
-
-            <div class="cta">
+            <div class="cta" style="margin-top:14px">
               <a class="btn" href="#projects">View Projects</a>
               <a class="btn ghost" href="mailto:youremail@example.com">Hire / Contact</a>
             </div>
-          </div>
 
-          <div style="display:flex;gap:12px;margin-top:22px;flex-wrap:wrap">
-            <div class="reveal-text reveal" style="min-width:160px">
-              <strong>Primary:</strong><br><span class="muted">React • Node • TypeScript</span>
-            </div>
-            <div class="reveal-text reveal" style="min-width:160px">
-              <strong>Mobile:</strong><br><span class="muted">React Native • Flutter</span>
-            </div>
-            <div class="reveal-text reveal" style="min-width:160px">
-              <strong>AI & Bots:</strong><br><span class="muted">Chatbots • Automation • APIs</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-img slide-right" aria-hidden="true">
-          <!-- Replace image URL easily --> 
-          <img src="https://images.unsplash.com/photo-1524499982521-1ffd58dd89ea?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=3d7b5d32a9ec5f3d8a0f9d14b7f9af23"
-               alt="Hero image — replace with your image URL">
-        </div>
-      </section>
-
-      <!-- ABOUT -->
-      <section id="about" class="reveal reveal-text">
-        <div class="section-title">
-          <h2>About Me</h2><div class="line"></div>
-        </div>
-
-        <div class="two-col">
-          <div>
-            <p class="muted">I’m a software developer focused on building scalable and delightful user experiences. I enjoy turning complex problems into simple, beautiful interfaces and reliable services.</p>
-            <div style="height:12px"></div>
-            <p class="reveal-text">I’ve worked across product teams building web apps, mobile apps, backend services, and automation tools. I often combine UI, serverless functions, and AI/bots to ship features quickly and iteratively.</p>
-
-            <div style="margin-top:18px" class="reveal-text">
-              <strong>Experience & Highlights</strong>
-              <ul style="margin:10px 0 0 18px;color:var(--muted)">
-                <li>Led front-end development for multiple production apps</li>
-                <li>Built chatbots and automation tools to save time & scale support</li>
-                <li>Deployed cloud-native services with CI/CD</li>
-              </ul>
+            <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
+              <div class="reveal" style="min-width:150px"><strong>Primary:</strong><br><span class="muted">React · Node · TypeScript</span></div>
+              <div class="reveal" style="min-width:150px"><strong>Mobile:</strong><br><span class="muted">React Native · Flutter</span></div>
+              <div class="reveal" style="min-width:150px"><strong>AI & Bots:</strong><br><span class="muted">Chatbots · Automation · APIs</span></div>
             </div>
           </div>
 
-          <aside class="reveal slide-left" style="padding:14px;border-radius:10px;background:linear-gradient(180deg,#0d0d0d,#0b0b0b);border:1px solid rgba(255,255,255,0.03)">
-            <div style="display:flex;gap:12px;align-items:center">
-              <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=bdf6f8802a4b9b8a9b6e3b5de2a1f8c7"
-                   alt="Your portrait — replace" style="width:78px;height:78px;border-radius:12px;object-fit:cover;border:2px solid rgba(255,255,255,0.03)">
-              <div>
-                <div style="font-weight:700">Your Name</div>
-                <div style="font-size:13px;color:var(--muted)">Full-Stack • Mobile • Bots</div>
-              </div>
-            </div>
-
-            <div style="margin-top:14px;color:var(--muted);font-size:14px">
-              <strong>Location:</strong> City, Country<br>
-              <strong>Email:</strong> youremail@example.com<br>
-              <strong>Availability:</strong> Open to new projects
-            </div>
-
-            <div style="margin-top:14px" class="socials">
-              <a class="btn ghost" href="#" style="font-size:13px">LinkedIn</a>
-              <a class="btn ghost" href="#" style="font-size:13px">GitHub</a>
-            </div>
-          </aside>
+          <div class="hero-img slide-right">
+            <!-- Replace image URL easily -->
+            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=abcd" alt="Hero image">
+          </div>
         </div>
       </section>
 
       <!-- PROJECTS -->
-      <section id="projects" class="reveal-text">
-        <div class="section-title">
-          <h2>Selected Projects</h2><div class="line"></div>
-        </div>
+      <section id="projects">
+        <div class="container">
+          <div class="section-title">
+            <h2>Selected Projects</h2><div class="line"></div>
+          </div>
 
-        <div class="grid">
-          <!-- Project card (repeatable). Replace image URLs / text -->
-          <article class="card reveal reveal-text">
-            <div class="thumb slide-left">
-              <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=7cfc4f5486b2df0a0c3f1f0ca7145dbb"
-                   alt="Project 1">
-            </div>
-            <div>
-              <div style="display:flex;align-items:center;justify-content:space-between">
-                <div style="font-weight:800">Project One</div>
-                <div class="muted" style="font-size:12px">Web App</div>
-              </div>
-              <p class="muted" style="margin:8px 0 0 0;font-size:14px">A modern dashboard with realtime data, charts and automation features.</p>
-              <div style="margin-top:10px" class="tags">
-                <span class="tag">React</span><span class="tag">Node</span><span class="tag">Socket</span>
-              </div>
-            </div>
-          </article>
+          <div class="grid">
+            <article class="card reveal">
+              <div class="thumb slide-left"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=123" alt="Project 1"></div>
+              <div><div style="display:flex;justify-content:space-between;align-items:center"><strong>Project One</strong><span class="muted" style="font-size:12px">Web App</span></div>
+              <p class="muted" style="margin-top:8px">A modern dashboard with realtime data, charts and automation features.</p>
+              <div class="tags" style="margin-top:10px"><span class="tag">React</span><span class="tag">Node</span><span class="tag">Socket</span></div></div>
+            </article>
 
-          <article class="card reveal reveal-text">
-            <div class="thumb slide-right">
-              <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=2d0218c6df5a7d1be8aa5b8b0d7ed5f0"
-                   alt="Project 2">
-            </div>
-            <div>
-              <div style="display:flex;align-items:center;justify-content:space-between">
-                <div style="font-weight:800">Mobile App</div>
-                <div class="muted" style="font-size:12px">iOS / Android</div>
-              </div>
-              <p class="muted" style="margin:8px 0 0 0;font-size:14px">Cross-platform app with offline sync and push notifications.</p>
-              <div style="margin-top:10px" class="tags">
-                <span class="tag">React Native</span><span class="tag">Cloud</span>
-              </div>
-            </div>
-          </article>
+            <article class="card reveal">
+              <div class="thumb slide-right"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=456" alt="Project 2"></div>
+              <div><div style="display:flex;justify-content:space-between;align-items:center"><strong>Mobile App</strong><span class="muted" style="font-size:12px">iOS / Android</span></div>
+              <p class="muted" style="margin-top:8px">Cross-platform app with offline sync and push notifications.</p>
+              <div class="tags" style="margin-top:10px"><span class="tag">React Native</span><span class="tag">Cloud</span></div></div>
+            </article>
 
-          <article class="card reveal reveal-text">
-            <div class="thumb slide-left">
-              <img src="https://images.unsplash.com/photo-1526378723353-82de4f0a3b6b?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=c3b7b5f5c2c1e7a9a5f6f7d5f8e1a402"
-                   alt="Project 3">
-            </div>
-            <div>
-              <div style="display:flex;align-items:center;justify-content:space-between">
-                <div style="font-weight:800">Bots & Tools</div>
-                <div class="muted" style="font-size:12px">Automation</div>
-              </div>
-              <p class="muted" style="margin:8px 0 0 0;font-size:14px">Chatbots, scheduled automations and data pipelines to speed workflows.</p>
-              <div style="margin-top:10px" class="tags">
-                <span class="tag">Python</span><span class="tag">APIs</span><span class="tag">AI</span>
-              </div>
-            </div>
-          </article>
-        </div>
+            <article class="card reveal">
+              <div class="thumb slide-left"><img src="https://images.unsplash.com/photo-1526378723353-82de4f0a3b6b?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=789" alt="Project 3"></div>
+              <div><div style="display:flex;justify-content:space-between;align-items:center"><strong>Bots & Tools</strong><span class="muted" style="font-size:12px">Automation</span></div>
+              <p class="muted" style="margin-top:8px">Chatbots, scheduled automations and data pipelines to speed workflows.</p>
+              <div class="tags" style="margin-top:10px"><span class="tag">Python</span><span class="tag">APIs</span><span class="tag">AI</span></div></div>
+            </article>
+          </div>
 
-        <div style="margin-top:18px;display:flex;justify-content:center">
-          <a class="btn" href="#" style="padding:12px 18px">View more projects</a>
+          <div style="display:flex;justify-content:center;margin-top:18px">
+            <a class="btn" href="#" onclick="return false">View more projects</a>
+          </div>
         </div>
       </section>
 
       <!-- SERVICES -->
-      <section id="services" class="reveal-text">
-        <div class="section-title">
-          <h2>Services</h2><div class="line"></div>
-        </div>
+      <section id="services">
+        <div class="container">
+          <div class="section-title">
+            <h2>Services</h2><div class="line"></div>
+          </div>
 
-        <div class="services">
-          <div class="service reveal-text">
-            <strong>Web Development</strong>
-            <div class="muted" style="margin-top:8px;font-size:14px">Modern frontends, server-side APIs, and full-stack products with performance & accessibility in mind.</div>
+          <div class="services">
+            <div class="service reveal"><strong>Web Development</strong><div class="muted" style="margin-top:8px">Modern frontends, server-side APIs, full-stack products.</div></div>
+            <div class="service reveal"><strong>App Development</strong><div class="muted" style="margin-top:8px">Cross-platform apps and native-like experiences.</div></div>
+            <div class="service reveal"><strong>Bots & Tools</strong><div class="muted" style="margin-top:8px">Chatbots, automations, pipelines & tooling.</div></div>
           </div>
-          <div class="service reveal-text">
-            <strong>App Development</strong>
-            <div class="muted" style="margin-top:8px;font-size:14px">Cross-platform apps, native-like experiences, and CI/CD for mobile releases.</div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about">
+        <div class="container">
+          <div class="section-title">
+            <h2>About Me</h2><div class="line"></div>
           </div>
-          <div class="service reveal-text">
-            <strong>Bots & Tools</strong>
-            <div class="muted" style="margin-top:8px;font-size:14px">Chatbots, automation pipelines, integrations and developer tools to speed delivery.</div>
+
+          <div class="two-col">
+            <div>
+              <p class="muted">I’m a software developer focused on building scalable and delightful user experiences. I enjoy turning complex problems into simple, beautiful interfaces and reliable services.</p>
+              <div style="height:12px"></div>
+              <p class="reveal">I’ve worked across product teams building web apps, mobile apps, backend services, and automation tools. I combine UI, serverless functions, and AI/bots to ship features quickly and iteratively.</p>
+
+              <div style="margin-top:18px">
+                <strong>Experience & Highlights</strong>
+                <ul style="margin:10px 0 0 18px;color:var(--muted)">
+                  <li>Led front-end development for multiple production apps</li>
+                  <li>Built chatbots and automation tools to save time & scale support</li>
+                  <li>Deployed cloud-native services with CI/CD</li>
+                </ul>
+              </div>
+            </div>
+
+            <aside class="reveal slide-left" style="padding:14px;border-radius:10px;background:linear-gradient(180deg,#0d0d0d,#0b0b0b);border:1px solid rgba(255,255,255,0.03)">
+              <div style="display:flex;gap:12px;align-items:center">
+                <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=abc" alt="Portrait" style="width:78px;height:78px;border-radius:12px;object-fit:cover;border:2px solid rgba(255,255,255,0.03)">
+                <div>
+                  <div style="font-weight:800">Your Name</div>
+                  <div style="font-size:13px;color:var(--muted)">Full-Stack • Mobile • Bots</div>
+                </div>
+              </div>
+
+              <div style="margin-top:14px;color:var(--muted);font-size:14px">
+                <strong>Location:</strong> City, Country<br>
+                <strong>Email:</strong> youremail@example.com<br>
+                <strong>Availability:</strong> Open to new projects
+              </div>
+
+              <div style="margin-top:14px" class="socials">
+                <a class="btn ghost" href="#" style="font-size:13px">LinkedIn</a>
+                <a class="btn ghost" href="#" style="font-size:13px">GitHub</a>
+              </div>
+            </aside>
           </div>
         </div>
       </section>
 
       <!-- CONTACT -->
-      <section id="contact" class="reveal-text">
-        <div class="section-title">
-          <h2>Contact</h2><div class="line"></div>
-        </div>
-
-        <div class="two-col">
-          <div>
-            <p class="muted">Interested in working together? Send a message or email me directly.</p>
-
-            <form class="contact-form" onsubmit="sendContact(event)">
-              <input class="input" id="name" placeholder="Your name" required>
-              <input class="input" id="email" type="email" placeholder="Your email" required>
-              <textarea id="message" placeholder="Tell me about the project..." required></textarea>
-              <div style="display:flex;gap:8px;align-items:center">
-                <button class="btn" type="submit">Send Message</button>
-                <a class="btn ghost" href="mailto:youremail@example.com">Email Me</a>
-              </div>
-            </form>
+      <section id="contact">
+        <div class="container">
+          <div class="section-title">
+            <h2>Contact</h2><div class="line"></div>
           </div>
 
-          <aside style="display:flex;flex-direction:column;gap:10px">
-            <div class="card reveal slide-right" style="padding:12px;">
-              <div style="font-weight:800">Quick Contact</div>
-              <div class="muted" style="margin-top:8px">youremail@example.com<br>+91 12345 67890</div>
+          <div class="two-col">
+            <div>
+              <p class="muted">Interested in working together? Send a message or email me directly.</p>
+
+              <form id="contactForm" class="contact-form" autocomplete="on">
+                <input class="input" name="name" type="text" placeholder="Your name" required>
+                <input class="input" name="email" type="email" placeholder="Your email" required>
+                <textarea name="message" placeholder="Tell me about the project..." required></textarea>
+
+                <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+                  <button class="btn" id="submitBtn" type="submit">Send Message</button>
+                  <a class="btn ghost" href="mailto:youremail@example.com">Email Me</a>
+                </div>
+
+                <!-- spinner -->
+                <div id="loadingSpinner" style="display:none;margin-top:12px">
+                  <div class="spinner"></div>
+                  <p class="muted" style="text-align:center;margin-top:6px;font-size:13px">Sending your message...</p>
+                </div>
+              </form>
             </div>
 
-            <div class="card reveal slide-left" style="padding:12px;display:flex;flex-direction:column;gap:8px">
-              <div style="font-weight:800">Availability</div>
-              <div class="muted">Open for freelance & full-time roles.</div>
-              <div style="margin-top:8px">
-                <a class="btn" href="#">Download Resume</a>
+            <aside style="display:flex;flex-direction:column;gap:10px">
+              <div class="card reveal slide-right" style="padding:12px;">
+                <div style="font-weight:800">Quick Contact</div>
+                <div class="muted" style="margin-top:8px">youremail@example.com<br>+91 12345 67890</div>
               </div>
-            </div>
-          </aside>
+
+              <div class="card reveal slide-left" style="padding:12px;display:flex;flex-direction:column;gap:8px">
+                <div style="font-weight:800">Availability</div>
+                <div class="muted">Open for freelance & full-time roles.</div>
+                <div style="margin-top:8px">
+                  <a class="btn" href="#">Download Resume</a>
+                </div>
+              </div>
+            </aside>
+          </div>
         </div>
+
+        <!-- popup -->
+        <div id="popup" class="popup" aria-live="polite" role="status"></div>
       </section>
 
       <footer>
-        <div>© <span id="year"></span> Your Name</div>
-        <div class="muted">Built with ❤️ · Bright Red Borders & Black Theme</div>
+        <div style="padding:20px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+          <div>© <span id="year"></span> Your Name</div>
+          <div class="muted">Built with ❤️ · Bright Red & Black Theme</div>
+        </div>
       </footer>
     </main>
   </div>
 
-  <!-- Javascript: smooth scroll + reveal on scroll + contact stub -->
+  <!-- WhatsApp Floating Button -->
+  <!-- CHANGE the phone number in the href to your number following international format (no +): 'https://wa.me/919876543210' -->
+  <a id="whatsappBtn" class="whatsapp-btn" href="https://wa.me/919876543210" target="_blank" rel="noopener" title="Chat on WhatsApp">💬</a>
+
   <script>
-    // Set year
+    /* =========================
+       CONFIG - CHANGE THESE
+       ========================= */
+    // 1) Backend endpoint (your BotHosting.net PHP endpoint)
+    const BACKEND_URL = "https://your-bothosting-subdomain.bothosting.net/send_mail.php";
+    // 2) WhatsApp: change the href in HTML above to your number (international format, no +)
+
+    /* =========================
+       UTIL: Smooth nav & active link
+       ========================= */
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Smooth scroll & active nav highlight
-    const links = document.querySelectorAll('.nav-link');
-    links.forEach(a=>{
-      a.addEventListener('click', e=>{
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(a=>{
+      a.addEventListener('click', (e)=>{
         e.preventDefault();
-        document.querySelectorAll('.nav-link').forEach(x=>x.classList.remove('active'));
+        navLinks.forEach(x=>x.classList.remove('active'));
         a.classList.add('active');
         const id = a.getAttribute('href');
         document.querySelector(id).scrollIntoView({behavior:'smooth',block:'start'});
       });
     });
 
-    // IntersectionObserver - reveal text and slide images
-    const observerOptions = { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.12 };
+    /* =========================
+       SECTION SLIDE LOGIC
+       - each section slides in when in viewport
+       - when leaving while scrolling down, it slides-left
+       ========================= */
+    const sections = document.querySelectorAll('section');
 
+    let lastScroll = window.scrollY;
+    function handleScroll(){
+      const scrollTop = window.scrollY;
+      const direction = scrollTop > lastScroll ? 'down' : 'up';
+      lastScroll = scrollTop;
+
+      sections.forEach(section=>{
+        const rect = section.getBoundingClientRect();
+        const top = rect.top;
+        const vh = window.innerHeight;
+
+        if (top < vh * 0.72 && top > -vh * 0.72){
+          // in view
+          section.classList.add('active');
+          section.classList.remove('slide-left');
+        } else {
+          // out of view
+          section.classList.remove('active');
+          if (direction === 'down') section.classList.add('slide-left');
+          else section.classList.remove('slide-left');
+        }
+      });
+    }
+    window.addEventListener('scroll', handleScroll, {passive:true});
+    window.addEventListener('resize', handleScroll);
+    // initial check
+    setTimeout(handleScroll, 60);
+
+    /* =========================
+       IntersectionObserver for reveals (text & images)
+       ========================= */
+    const ioOptions = { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.12 };
     const revealCb = (entries, obs) => {
-      for(const entry of entries){
-        if(entry.isIntersecting){
+      entries.forEach(entry => {
+        if (entry.isIntersecting){
           entry.target.classList.add('in-view');
-          // If you want the animation only once:
           obs.unobserve(entry.target);
         }
-      }
-    };
-
-    const observer = new IntersectionObserver(revealCb, observerOptions);
-
-    // choose all elements that should reveal on scroll
-    document.querySelectorAll('.reveal, .reveal-text, .slide-left, .slide-right').forEach(el=>{
-      observer.observe(el);
-    });
-
-    // Make sure page sections that are already in view get class (on load)
-    window.addEventListener('load', ()=> {
-      document.querySelectorAll('.reveal, .reveal-text, .slide-left, .slide-right').forEach(el=>{
-        const rect = el.getBoundingClientRect();
-        if(rect.top < window.innerHeight - 60) el.classList.add('in-view');
       });
+    };
+    const io = new IntersectionObserver(revealCb, ioOptions);
+    document.querySelectorAll('.reveal, .slide-left, .slide-right, .hero-card h1, .hero-card p, .card, .service').forEach(el=>{
+      io.observe(el);
     });
 
-    // Contact form stub: no backend — we'll open mailto with content as fallback
-    function sendContact(e){
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-      if(!name || !email || !message){ alert('Please fill all fields.'); return; }
+    /* =========================
+       CONTACT FORM: spinner + popup + fetch POST
+       ========================= */
+    const form = document.getElementById('contactForm');
+    const spinnerEl = document.getElementById('loadingSpinner');
+    const popup = document.getElementById('popup');
+    const submitBtn = document.getElementById('submitBtn');
 
-      // try to send via Fetch to /api/contact (if you add backend later). For now fallback to mailto:
-      const mailto = `mailto:youremail@example.com?subject=${encodeURIComponent('Portfolio contact from ' + name)}&body=${encodeURIComponent('Name: '+name+'\\nEmail: '+email+'\\n\\n'+message)}`;
-      window.location.href = mailto;
+    function showPopup(type, message){
+      popup.textContent = message;
+      popup.className = 'popup show ' + (type === 'success' ? 'success' : 'error');
+      // auto hide after 4s
+      setTimeout(()=> popup.classList.remove('show'), 4200);
     }
 
-    // Optional: keyboard shortcut "g" to go top (small convenience)
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      // basic client-side validation
+      const fd = new FormData(form);
+      const name = (fd.get('name') || '').toString().trim();
+      const email = (fd.get('email') || '').toString().trim();
+      const message = (fd.get('message') || '').toString().trim();
+      if(!name || !email || !message){ showPopup('error', 'Please fill all fields'); return; }
+
+      spinnerEl.style.display = 'block';
+      submitBtn.disabled = true;
+
+      try {
+        const res = await fetch(BACKEND_URL, { method: 'POST', body: fd });
+        // expect JSON { status: 'success'|'error', message: '...' }
+        const data = await res.json();
+        spinnerEl.style.display = 'none';
+        submitBtn.disabled = false;
+        if(data.status === 'success'){
+          showPopup('success', data.message || 'Message sent successfully!');
+          form.reset();
+        } else {
+          showPopup('error', data.message || 'Failed to send message');
+        }
+      } catch (err) {
+        spinnerEl.style.display = 'none';
+        submitBtn.disabled = false;
+        showPopup('error', 'Network error. Please try again.');
+        console.error('Contact send error', err);
+      }
+    });
+
+    /* =========================
+       Keyboard shortcut: ctrl/cmd + G to go top
+       ========================= */
     window.addEventListener('keydown', e=>{
-      if(e.key.toLowerCase()==='g' && (e.ctrlKey || e.metaKey)){
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'g'){
         e.preventDefault();
         document.getElementById('top').scrollIntoView({behavior:'smooth'});
       }
     });
+
+    /* =========================
+       Accessibility: reduce motion if user prefers
+       ========================= */
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mq.matches){
+      // disable transitions for reduced motion users
+      document.querySelectorAll('section, .card, .btn, .popup, .hero-img, .spinner').forEach(el=>{
+        el.style.transition = 'none';
+      });
+    }
   </script>
 </body>
 </html>
