@@ -1,577 +1,402 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Your Portfolio — Red & Black</title>
-  <meta name="description" content="Web, App & Bots Developer — Portfolio" />
-  <meta name="theme-color" content="#0b0b0b" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
 
   <style>
-    /* =========================
-       THEME VARIABLES
-       ========================= */
-    :root{
-      --bg:#0b0b0b;
-      --panel:#0f0f10;
-      --accent:#ff1f1f; /* bright red */
-      --muted:#9b9b9b;
-      --glass: rgba(255,255,255,0.03);
-      --card:#131313;
-      --radius:12px;
-      --max-width:1200px;
+    /* =============== ROOT THEME COLORS =============== */
+    :root {
+      --bg: #0b0b0b;
+      --text: #ffffff;
+      --accent: #ff1a1a;
+      --card: #141414;
     }
 
-    /* =========================
-       BASE RESET
-       ========================= */
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(180deg,#070707 0%, #0e0e0e 100%);
-      color:#eee;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
-      display:flex;
-      justify-content:center;
-      padding:20px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
     }
 
-    /* =========================
-       WRAPPER
-       ========================= */
-    .wrap{
-      width:100%;
-      max-width:var(--max-width);
-      border-radius:16px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
-      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
-      border: 6px solid var(--accent);
-      overflow:hidden;
+    body {
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
     }
 
-    /* =========================
-       HEADER / NAV
-       ========================= */
     header {
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 40;
-      backdrop-filter: blur(6px);
-      background: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.12));
-      border-bottom:1px solid rgba(255,255,255,0.03);
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 15px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      border-bottom: 2px solid var(--accent);
     }
-    .navbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:14px 22px;
-    }
-    .brand{
-      display:flex;align-items:center;gap:12px;color:var(--accent);font-weight:800
-    }
-    .logo{
-      width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#fff2f2,#ffbfbf);display:flex;align-items:center;justify-content:center;color:#121212;font-weight:900;
-      box-shadow: 0 8px 20px rgba(255,31,31,0.12);
-    }
-    nav ul{display:flex;gap:10px;list-style:none;padding:0;margin:0}
-    nav a{color:#ddd;text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:700;transition:all .22s}
-    nav a:hover{transform:translateY(-3px);color:var(--accent)}
-    nav a.active{color:var(--accent);text-shadow:0 2px 12px rgba(255,31,31,0.08)}
 
-    /* =========================
-       SECTIONS (full-screen style)
-       ========================= */
-    main{
-      overflow:visible;
+    header h1 {
+      color: var(--accent);
+      letter-spacing: 1px;
     }
-    section{
-      min-height:calc(100vh - 100px); /* header + padding */
-      display:flex;
-      align-items:center;
-      padding:60px 28px;
-      gap:28px;
-      position:relative;
-      transition: transform 0.8s cubic-bezier(.2,.9,.2,1), opacity 0.6s ease;
-      opacity:0;
+
+    nav a {
+      color: var(--text);
+      margin-left: 20px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 100px 30px 60px;
+      transition: transform 0.8s ease, opacity 0.8s ease;
+      opacity: 0;
       transform: translateX(100%);
-      will-change: transform, opacity;
     }
-    /* when visible */
-    section.active{
-      opacity:1;
+
+    section.active {
+      opacity: 1;
       transform: translateX(0);
     }
-    /* when sliding out to left */
-    section.slide-left{
+
+    section.slide-left {
       transform: translateX(-100%);
-      opacity:0;
     }
 
-    .container {
-      width:100%;
-      max-width:1100px;
-      margin:0 auto;
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: var(--accent);
     }
 
-    /* HERO */
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1fr 420px;
-      gap:24px;
-      align-items:center;
+    p {
+      max-width: 700px;
+      font-size: 1rem;
+      line-height: 1.6;
     }
-    .hero-card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
-      padding:28px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+
+    /* =============== PROJECTS =============== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      width: 90%;
+      max-width: 1000px;
+      margin-top: 30px;
     }
-    .hero h1{font-size:36px;margin:0 0 8px 0;color:#fff}
-    .muted{color:var(--muted)}
-    .hero p{margin:0 0 18px 0;font-size:15px;color:#e6e6e6}
 
-    .cta{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:800;cursor:pointer;box-shadow: 0 10px 30px rgba(255,31,31,0.12)}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:#fff}
-
-    .hero-img{border-radius:12px;overflow:hidden;border: 2px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,#111,#0b0b0b)}
-    .hero-img img{width:100%;height:100%;object-fit:cover;display:block}
-
-    /* GENERAL SECTION STYLES */
-    .section-title{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-    .section-title h2{margin:0;font-size:22px;color:#fff}
-    .line{flex:1;height:1px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.04));border-radius:2px}
-
-    /* GRID CARDS */
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
+    .project-card {
+      background: var(--card);
+      padding: 15px;
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
-      padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);
-      display:flex;flex-direction:column;gap:12px;transition:transform .35s ease, box-shadow .35s ease;
+
+    .project-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
     }
-    .card:hover{transform:translateY(-10px);box-shadow:0 22px 60px rgba(0,0,0,0.6)}
-    .thumb{height:160px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
-    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .tags{display:flex;gap:8px;flex-wrap:wrap}
-    .tag{font-size:12px;background:rgba(255,31,31,0.12);color:var(--accent);padding:6px 8px;border-radius:8px;font-weight:800}
 
-    /* SERVICES */
-    .services{display:flex;gap:12px;flex-wrap:wrap}
-    .service{flex:1;min-width:220px;padding:16px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.006), rgba(255,255,255,0.003));border:1px solid rgba(255,255,255,0.02)}
-
-    /* ABOUT & CONTACT */
-    .two-col{display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start}
-    .contact-form{display:flex;flex-direction:column;gap:10px}
-    .input, textarea{background:var(--glass);border:1px solid rgba(255,255,255,0.03);padding:12px;border-radius:8px;color:#fff;font-size:14px}
-    textarea{min-height:120px;resize:vertical}
-
-    footer{padding:18px;border-top:1px solid rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:13px}
-
-    /* =========================
-       REVEAL / SLIDE ANIMATIONS
-       ========================= */
-    .reveal{opacity:0;transform: translateY(20px);transition:transform .7s cubic-bezier(.2,.9,.2,1),opacity .7s ease}
-    .reveal.in-view{opacity:1;transform: translateY(0)}
-    .slide-left{opacity:0;transform:translateX(-40px) scale(.99);transition:transform .8s .05s cubic-bezier(.2,.9,.2,1),opacity .8s ease}
-    .slide-right{opacity:0;transform:translateX(40px) scale(.99);transition:transform .8s .05s cubic-bezier(.2,.9,.2,1),opacity .8s ease}
-    .slide-left.in-view,.slide-right.in-view{opacity:1;transform:translateX(0) scale(1)}
-
-    /* Popup + spinner */
-    .spinner{border:4px solid #222;border-top:4px solid var(--accent);border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite;margin:0 auto}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .popup{position:fixed;top:20px;right:-420px;background:var(--card);color:var(--text);padding:14px 18px;border-left:4px solid var(--accent);border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,0.4);opacity:0;transition:right .45s ease,opacity .45s ease;z-index:999}
-    .popup.show{right:20px;opacity:1}
-    .popup.success{border-left-color:#25d366}
-    .popup.error{border-left-color:#ff3333}
-
-    /* WhatsApp button */
-    .whatsapp-btn{position:fixed;bottom:20px;right:20px;background:#25d366;color:#fff;width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 8px 24px rgba(0,0,0,0.3);z-index:999;cursor:pointer;text-decoration:none}
-    .whatsapp-btn:hover{transform:scale(1.06);transition:transform .18s}
-
-    /* =========================
-       RESPONSIVE
-       ========================= */
-    @media (max-width:1000px){
-      .hero-grid{grid-template-columns:1fr}
-      .two-col{grid-template-columns:1fr}
-      .grid{grid-template-columns:repeat(2,1fr)}
-      section{padding:40px 18px}
-      .hero-img{height:320px}
+    .project-card img:hover {
+      transform: scale(1.08);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      filter: brightness(1.1);
     }
-    @media (max-width:640px){
-      .grid{grid-template-columns:1fr}
-      nav ul{display:none}
-      .navbar{padding:12px}
-      .logo{width:40px;height:40px}
+
+    .project-card img.clicked {
+      transform: scale(1.15);
+      transition: transform 0.2s ease;
+    }
+
+    .project-card h3 {
+      margin-top: 10px;
+      color: var(--accent);
+    }
+
+    /* =============== CONTACT FORM =============== */
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      max-width: 400px;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    form input, form textarea {
+      padding: 10px 15px;
+      border: 2px solid var(--accent);
+      border-radius: 6px;
+      background: transparent;
+      color: var(--text);
+      resize: none;
+    }
+
+    form button {
+      background: var(--accent);
+      color: var(--text);
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    form button:hover {
+      background: #ff4040;
+    }
+
+    /* =============== LOADING + POPUP =============== */
+    .spinner {
+      border: 4px solid #333;
+      border-top: 4px solid var(--accent);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 10px auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .popup {
+      position: fixed;
+      top: 20px;
+      right: -400px;
+      background: var(--card);
+      color: var(--text);
+      padding: 15px 25px;
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      opacity: 0;
+      transition: right 0.5s ease, opacity 0.5s ease;
+      z-index: 100;
+    }
+
+    .popup.show {
+      right: 20px;
+      opacity: 1;
+    }
+
+    .popup.success { border-left-color: #25d366; }
+    .popup.error { border-left-color: #ff3333; }
+
+    /* =============== WHATSAPP BUTTON =============== */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+      text-decoration: none;
+      z-index: 999;
+    }
+
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
     }
   </style>
 </head>
 <body>
-  <div class="wrap" id="top">
-    <header>
-      <div class="navbar container" style="padding:12px 20px">
-        <div class="brand">
-          <div class="logo">YN</div>
-          <div style="line-height:1;">
-            <div style="font-weight:800">Your Name</div>
-            <div style="font-size:12px;color:var(--muted)">Web · App · Bots & Tools</div>
-          </div>
-        </div>
 
-        <nav aria-label="Primary navigation">
-          <ul>
-            <li><a class="nav-link active" href="#home">Home</a></li>
-            <li><a class="nav-link" href="#projects">Projects</a></li>
-            <li><a class="nav-link" href="#services">Services</a></li>
-            <li><a class="nav-link" href="#about">About</a></li>
-            <li><a class="nav-link" href="#contact">Contact</a></li>
-          </ul>
-        </nav>
+  <!-- HEADER -->
+  <header>
+    <h1>My Portfolio</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HOME -->
+  <section id="home" class="active">
+    <h2>Welcome to My Portfolio</h2>
+    <p>I'm a Developer passionate about Web, App, and Bot Development.</p>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <h2>My Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="https://via.placeholder.com/400x250" alt="Project 1" />
+        <h3>Portfolio Website</h3>
+        <p>Responsive personal website built using HTML, CSS & JS.</p>
       </div>
-    </header>
+      <div class="project-card">
+        <img src="https://via.placeholder.com/400x250" alt="Project 2" />
+        <h3>Discord Bot</h3>
+        <p>Automation and utility bot built using Node.js.</p>
+      </div>
+      <div class="project-card">
+        <img src="https://via.placeholder.com/400x250" alt="Project 3" />
+        <h3>App Tool</h3>
+        <p>Mobile app designed for efficiency and simplicity.</p>
+      </div>
+    </div>
+  </section>
 
-    <main>
-      <!-- HOME / HERO -->
-      <section id="home" class="active">
-        <div class="container hero-grid">
-          <div class="hero-card">
-            <div class="reveal" style="margin-bottom:8px">
-              <small style="color:var(--muted);font-weight:700">Hi — I'm a Full-Stack Maker</small>
-            </div>
-            <h1 class="reveal">I build Web, Mobile Apps & Intelligent Bots</h1>
-            <p class="reveal muted">I design and develop smooth, fast, and delightful apps — from product idea to production. Focus: Web Development, Mobile / Cross-platform Apps, Bots & Automations, and Tools that scale.</p>
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I'm a full-stack developer who loves building creative and efficient digital experiences. I specialize in
+      <b>Web Development, App Development, and Automation Tools</b>.
+    </p>
+  </section>
 
-            <div class="cta" style="margin-top:14px">
-              <a class="btn" href="#projects">View Projects</a>
-              <a class="btn ghost" href="mailto:youremail@example.com">Hire / Contact</a>
-            </div>
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <p>Send me a message below, and I’ll get back soon!</p>
 
-            <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap">
-              <div class="reveal" style="min-width:150px"><strong>Primary:</strong><br><span class="muted">React · Node · TypeScript</span></div>
-              <div class="reveal" style="min-width:150px"><strong>Mobile:</strong><br><span class="muted">React Native · Flutter</span></div>
-              <div class="reveal" style="min-width:150px"><strong>AI & Bots:</strong><br><span class="muted">Chatbots · Automation · APIs</span></div>
-            </div>
-          </div>
+    <form id="contactForm">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message..." required></textarea>
+      <button type="submit" id="submitBtn">Send Message</button>
+    </form>
 
-          <div class="hero-img slide-right">
-            <!-- Replace image URL easily -->
-            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=abcd" alt="Hero image">
-          </div>
-        </div>
-      </section>
+    <div id="loadingSpinner" style="display:none;">
+      <div class="spinner"></div>
+      <p>Sending your message...</p>
+    </div>
 
-      <!-- PROJECTS -->
-      <section id="projects">
-        <div class="container">
-          <div class="section-title">
-            <h2>Selected Projects</h2><div class="line"></div>
-          </div>
+    <div id="popup" class="popup"></div>
+  </section>
 
-          <div class="grid">
-            <article class="card reveal">
-              <div class="thumb slide-left"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=123" alt="Project 1"></div>
-              <div><div style="display:flex;justify-content:space-between;align-items:center"><strong>Project One</strong><span class="muted" style="font-size:12px">Web App</span></div>
-              <p class="muted" style="margin-top:8px">A modern dashboard with realtime data, charts and automation features.</p>
-              <div class="tags" style="margin-top:10px"><span class="tag">React</span><span class="tag">Node</span><span class="tag">Socket</span></div></div>
-            </article>
+  <!-- WHATSAPP FLOAT BUTTON -->
+  <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-btn">
+    💬
+  </a>
 
-            <article class="card reveal">
-              <div class="thumb slide-right"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=456" alt="Project 2"></div>
-              <div><div style="display:flex;justify-content:space-between;align-items:center"><strong>Mobile App</strong><span class="muted" style="font-size:12px">iOS / Android</span></div>
-              <p class="muted" style="margin-top:8px">Cross-platform app with offline sync and push notifications.</p>
-              <div class="tags" style="margin-top:10px"><span class="tag">React Native</span><span class="tag">Cloud</span></div></div>
-            </article>
-
-            <article class="card reveal">
-              <div class="thumb slide-left"><img src="https://images.unsplash.com/photo-1526378723353-82de4f0a3b6b?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=789" alt="Project 3"></div>
-              <div><div style="display:flex;justify-content:space-between;align-items:center"><strong>Bots & Tools</strong><span class="muted" style="font-size:12px">Automation</span></div>
-              <p class="muted" style="margin-top:8px">Chatbots, scheduled automations and data pipelines to speed workflows.</p>
-              <div class="tags" style="margin-top:10px"><span class="tag">Python</span><span class="tag">APIs</span><span class="tag">AI</span></div></div>
-            </article>
-          </div>
-
-          <div style="display:flex;justify-content:center;margin-top:18px">
-            <a class="btn" href="#" onclick="return false">View more projects</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- SERVICES -->
-      <section id="services">
-        <div class="container">
-          <div class="section-title">
-            <h2>Services</h2><div class="line"></div>
-          </div>
-
-          <div class="services">
-            <div class="service reveal"><strong>Web Development</strong><div class="muted" style="margin-top:8px">Modern frontends, server-side APIs, full-stack products.</div></div>
-            <div class="service reveal"><strong>App Development</strong><div class="muted" style="margin-top:8px">Cross-platform apps and native-like experiences.</div></div>
-            <div class="service reveal"><strong>Bots & Tools</strong><div class="muted" style="margin-top:8px">Chatbots, automations, pipelines & tooling.</div></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ABOUT -->
-      <section id="about">
-        <div class="container">
-          <div class="section-title">
-            <h2>About Me</h2><div class="line"></div>
-          </div>
-
-          <div class="two-col">
-            <div>
-              <p class="muted">I’m a software developer focused on building scalable and delightful user experiences. I enjoy turning complex problems into simple, beautiful interfaces and reliable services.</p>
-              <div style="height:12px"></div>
-              <p class="reveal">I’ve worked across product teams building web apps, mobile apps, backend services, and automation tools. I combine UI, serverless functions, and AI/bots to ship features quickly and iteratively.</p>
-
-              <div style="margin-top:18px">
-                <strong>Experience & Highlights</strong>
-                <ul style="margin:10px 0 0 18px;color:var(--muted)">
-                  <li>Led front-end development for multiple production apps</li>
-                  <li>Built chatbots and automation tools to save time & scale support</li>
-                  <li>Deployed cloud-native services with CI/CD</li>
-                </ul>
-              </div>
-            </div>
-
-            <aside class="reveal slide-left" style="padding:14px;border-radius:10px;background:linear-gradient(180deg,#0d0d0d,#0b0b0b);border:1px solid rgba(255,255,255,0.03)">
-              <div style="display:flex;gap:12px;align-items:center">
-                <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=abc" alt="Portrait" style="width:78px;height:78px;border-radius:12px;object-fit:cover;border:2px solid rgba(255,255,255,0.03)">
-                <div>
-                  <div style="font-weight:800">Your Name</div>
-                  <div style="font-size:13px;color:var(--muted)">Full-Stack • Mobile • Bots</div>
-                </div>
-              </div>
-
-              <div style="margin-top:14px;color:var(--muted);font-size:14px">
-                <strong>Location:</strong> City, Country<br>
-                <strong>Email:</strong> youremail@example.com<br>
-                <strong>Availability:</strong> Open to new projects
-              </div>
-
-              <div style="margin-top:14px" class="socials">
-                <a class="btn ghost" href="#" style="font-size:13px">LinkedIn</a>
-                <a class="btn ghost" href="#" style="font-size:13px">GitHub</a>
-              </div>
-            </aside>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      <section id="contact">
-        <div class="container">
-          <div class="section-title">
-            <h2>Contact</h2><div class="line"></div>
-          </div>
-
-          <div class="two-col">
-            <div>
-              <p class="muted">Interested in working together? Send a message or email me directly.</p>
-
-              <form id="contactForm" class="contact-form" autocomplete="on">
-                <input class="input" name="name" type="text" placeholder="Your name" required>
-                <input class="input" name="email" type="email" placeholder="Your email" required>
-                <textarea name="message" placeholder="Tell me about the project..." required></textarea>
-
-                <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
-                  <button class="btn" id="submitBtn" type="submit">Send Message</button>
-                  <a class="btn ghost" href="mailto:youremail@example.com">Email Me</a>
-                </div>
-
-                <!-- spinner -->
-                <div id="loadingSpinner" style="display:none;margin-top:12px">
-                  <div class="spinner"></div>
-                  <p class="muted" style="text-align:center;margin-top:6px;font-size:13px">Sending your message...</p>
-                </div>
-              </form>
-            </div>
-
-            <aside style="display:flex;flex-direction:column;gap:10px">
-              <div class="card reveal slide-right" style="padding:12px;">
-                <div style="font-weight:800">Quick Contact</div>
-                <div class="muted" style="margin-top:8px">youremail@example.com<br>+91 12345 67890</div>
-              </div>
-
-              <div class="card reveal slide-left" style="padding:12px;display:flex;flex-direction:column;gap:8px">
-                <div style="font-weight:800">Availability</div>
-                <div class="muted">Open for freelance & full-time roles.</div>
-                <div style="margin-top:8px">
-                  <a class="btn" href="#">Download Resume</a>
-                </div>
-              </div>
-            </aside>
-          </div>
-        </div>
-
-        <!-- popup -->
-        <div id="popup" class="popup" aria-live="polite" role="status"></div>
-      </section>
-
-      <footer>
-        <div style="padding:20px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
-          <div>© <span id="year"></span> Your Name</div>
-          <div class="muted">Built with ❤️ · Bright Red & Black Theme</div>
-        </div>
-      </footer>
-    </main>
-  </div>
-
-  <!-- WhatsApp Floating Button -->
-  <!-- CHANGE the phone number in the href to your number following international format (no +): 'https://wa.me/919876543210' -->
-  <a id="whatsappBtn" class="whatsapp-btn" href="https://wa.me/919876543210" target="_blank" rel="noopener" title="Chat on WhatsApp">💬</a>
-
+  <!-- =============== JAVASCRIPT =============== -->
   <script>
-    /* =========================
-       CONFIG - CHANGE THESE
-       ========================= */
-    // 1) Backend endpoint (your BotHosting.net PHP endpoint)
-    const BACKEND_URL = "https://your-bothosting-subdomain.bothosting.net/send_mail.php";
-    // 2) WhatsApp: change the href in HTML above to your number (international format, no +)
-
-    /* =========================
-       UTIL: Smooth nav & active link
-       ========================= */
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        e.preventDefault();
-        navLinks.forEach(x=>x.classList.remove('active'));
-        a.classList.add('active');
-        const id = a.getAttribute('href');
-        document.querySelector(id).scrollIntoView({behavior:'smooth',block:'start'});
-      });
+    // Home visibility fix
+    window.addEventListener("load", () => {
+      const firstSection = document.querySelector("section");
+      if (firstSection) {
+        firstSection.classList.add("active");
+        firstSection.classList.remove("slide-left");
+      }
     });
 
-    /* =========================
-       SECTION SLIDE LOGIC
-       - each section slides in when in viewport
-       - when leaving while scrolling down, it slides-left
-       ========================= */
-    const sections = document.querySelectorAll('section');
-
+    // Slide Scroll Animation
+    const sections = document.querySelectorAll("section");
     let lastScroll = window.scrollY;
-    function handleScroll(){
+
+    const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const direction = scrollTop > lastScroll ? 'down' : 'up';
+      const windowHeight = window.innerHeight;
+      const direction = scrollTop > lastScroll ? "down" : "up";
       lastScroll = scrollTop;
 
-      sections.forEach(section=>{
-        const rect = section.getBoundingClientRect();
-        const top = rect.top;
-        const vh = window.innerHeight;
-
-        if (top < vh * 0.72 && top > -vh * 0.72){
-          // in view
-          section.classList.add('active');
-          section.classList.remove('slide-left');
+      sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        if (top < windowHeight * 0.7 && top > -windowHeight * 0.7) {
+          section.classList.add("active");
+          section.classList.remove("slide-left");
         } else {
-          // out of view
-          section.classList.remove('active');
-          if (direction === 'down') section.classList.add('slide-left');
-          else section.classList.remove('slide-left');
-        }
-      });
-    }
-    window.addEventListener('scroll', handleScroll, {passive:true});
-    window.addEventListener('resize', handleScroll);
-    // initial check
-    setTimeout(handleScroll, 60);
-
-    /* =========================
-       IntersectionObserver for reveals (text & images)
-       ========================= */
-    const ioOptions = { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.12 };
-    const revealCb = (entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting){
-          entry.target.classList.add('in-view');
-          obs.unobserve(entry.target);
+          if (direction === "down") section.classList.add("slide-left");
+          else section.classList.remove("slide-left");
+          section.classList.remove("active");
         }
       });
     };
-    const io = new IntersectionObserver(revealCb, ioOptions);
-    document.querySelectorAll('.reveal, .slide-left, .slide-right, .hero-card h1, .hero-card p, .card, .service').forEach(el=>{
-      io.observe(el);
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    // Project image click effect
+    document.querySelectorAll('.project-card img').forEach(img => {
+      img.addEventListener('click', () => {
+        img.classList.add('clicked');
+        setTimeout(() => img.classList.remove('clicked'), 400);
+      });
     });
 
-    /* =========================
-       CONTACT FORM: spinner + popup + fetch POST
-       ========================= */
-    const form = document.getElementById('contactForm');
-    const spinnerEl = document.getElementById('loadingSpinner');
-    const popup = document.getElementById('popup');
-    const submitBtn = document.getElementById('submitBtn');
+    // Contact Form Logic
+    const form = document.getElementById("contactForm");
+    const spinner = document.getElementById("loadingSpinner");
+    const popup = document.getElementById("popup");
+    const submitBtn = document.getElementById("submitBtn");
 
-    function showPopup(type, message){
+    function showPopup(type, message) {
       popup.textContent = message;
-      popup.className = 'popup show ' + (type === 'success' ? 'success' : 'error');
-      // auto hide after 4s
-      setTimeout(()=> popup.classList.remove('show'), 4200);
+      popup.className = `popup show ${type}`;
+      setTimeout(() => popup.classList.remove("show"), 4000);
     }
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      // basic client-side validation
-      const fd = new FormData(form);
-      const name = (fd.get('name') || '').toString().trim();
-      const email = (fd.get('email') || '').toString().trim();
-      const message = (fd.get('message') || '').toString().trim();
-      if(!name || !email || !message){ showPopup('error', 'Please fill all fields'); return; }
 
-      spinnerEl.style.display = 'block';
+      spinner.style.display = "block";
       submitBtn.disabled = true;
 
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value
+      };
+
       try {
-        const res = await fetch(BACKEND_URL, { method: 'POST', body: fd });
-        // expect JSON { status: 'success'|'error', message: '...' }
-        const data = await res.json();
-        spinnerEl.style.display = 'none';
+        const res = await fetch("https://your-bothosting-name.bothosting.net/send", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        const result = await res.json();
+        spinner.style.display = "none";
         submitBtn.disabled = false;
-        if(data.status === 'success'){
-          showPopup('success', data.message || 'Message sent successfully!');
+
+        if (result.status === "success") {
+          showPopup("success", result.message);
           form.reset();
         } else {
-          showPopup('error', data.message || 'Failed to send message');
+          showPopup("error", result.message);
         }
       } catch (err) {
-        spinnerEl.style.display = 'none';
+        spinner.style.display = "none";
         submitBtn.disabled = false;
-        showPopup('error', 'Network error. Please try again.');
-        console.error('Contact send error', err);
+        showPopup("error", "❌ Failed to send message. Try again later.");
       }
     });
-
-    /* =========================
-       Keyboard shortcut: ctrl/cmd + G to go top
-       ========================= */
-    window.addEventListener('keydown', e=>{
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'g'){
-        e.preventDefault();
-        document.getElementById('top').scrollIntoView({behavior:'smooth'});
-      }
-    });
-
-    /* =========================
-       Accessibility: reduce motion if user prefers
-       ========================= */
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (mq.matches){
-      // disable transitions for reduced motion users
-      document.querySelectorAll('section, .card, .btn, .popup, .hero-img, .spinner').forEach(el=>{
-        el.style.transition = 'none';
-      });
-    }
   </script>
 </body>
 </html>
